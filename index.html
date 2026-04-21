@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AUEZOV UNIVERSITY PORTAL</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    /* HERO */
+    .hero {
+      height: 65vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h2 { font-size: 48px; }
+
+    .hero button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: #2a5298;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* PROFILE */
+    .profile {
+      background: white;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #ddd;
+      object-fit: cover;
+    }
+
+    /* UPLOAD */
+    .upload {
+      font-size: 12px;
+    }
+
+    /* SECTION */
+    .section {
+      background: white;
+      padding: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #2a5298;
+      color: white;
+    }
+
+    .gpa {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* GRID */
+    .grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 10px;
+      width: 250px;
+    }
+
+    /* GRAPH */
+    canvas {
+      background: #fff;
+      border: 1px solid #ddd;
+      margin-top: 10px;
+    }
+
+    /* DIPLOMA */
+    .diploma {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .diploma-content {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      width: 400px;
+    }
+
+    /* CONTACTS */
+    .contacts {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    button.small {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>AUEZOV UNIVERSITY</h1>
+  <nav>
+    <a href="#home">LOBBY</a>
+    <a href="#journal">JOURNAL</a>
+    <a href="#schedule">SCHEDULE</a>
+    <a href="#contacts">CONTACTS</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div>
+    <h2>Қош келдіңіз!</h2>
+    <p>Университеттік оқу порталы</p>
+    <a href="#journal"><button>Бастау</button></a>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile" id="journal">
+  <img id="avatar" class="avatar" src="https://via.placeholder.com/100" />
+  <div>
+    <h2>ABDRAZAK RAIMKHAN</h2>
+    <p>Группа: ST 24-9K</p>
+
+    <div class="upload">
+      <input type="file" onchange="loadPhoto(event)">
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section class="section">
+
+  <h2>Журнал</h2>
+
+  <table>
+    <tr>
+      <th>Пән</th>
+      <th>1 атт</th>
+      <th>2 атт</th>
+      <th>Қорытынды</th>
+    </tr>
+    <tr><td>Социология</td><td>85</td><td>90</td><td class="g">88</td></tr>
+    <tr><td>Философия</td><td>80</td><td>87</td><td class="g">84</td></tr>
+    <tr><td>ИКТ</td><td>92</td><td>95</td><td class="g">94</td></tr>
+    <tr><td>Маркетинг</td><td>78</td><td>82</td><td class="g">80</td></tr>
+  </table>
+
+  <div class="gpa" id="gpa"></div>
+
+  <h3>Успеваемость графигі</h3>
+  <canvas id="chart" width="400" height="200"></canvas>
+
+  <button class="small" onclick="openDiploma()">Диплом көру</button>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="section">
+  <h2>Расписание</h2>
+
+  <div class="grid">
+    <div class="card">Дүйсенбі: Социология, ИКТ</div>
+    <div class="card">Сейсенбі: Философия</div>
+    <div class="card">Сәрсенбі: Маркетинг</div>
+    <div class="card">Бейсенбі: ИКТ</div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="contacts">
+  <h2>Contacts</h2>
+  <p>ABDRAZAK RAIMKHAN</p>
+  <p>📞 +7 771 626 0608</p>
+</section>
+
+<!-- DIPLOMA -->
+<div class="diploma" id="diploma">
+  <div class="diploma-content">
+    <h2>ДИПЛОМ</h2>
+    <p>Студент: ABDRAZAK RAIMKHAN</p>
+    <p>Группа: ST 24-9K</p>
+    <p id="diplomaGpa"></p>
+    <button onclick="closeDiploma()">Жабу</button>
+  </div>
+</div>
+
+<script>
+  // PHOTO UPLOAD
+  function loadPhoto(event){
+    const img = document.getElementById("avatar");
+    img.src = URL.createObjectURL(event.target.files[0]);
+  }
+
+  // GPA CALC
+  const grades = document.querySelectorAll(".g");
+  let sum = 0;
+
+  grades.forEach(e => sum += Number(e.textContent));
+  let avg = sum / grades.length;
+  let gpa = (avg / 25).toFixed(2);
+
+  document.getElementById("gpa").innerText = "GPA: " + gpa;
+
+  // CHART
+  const ctx = document.getElementById("chart").getContext("2d");
+  const values = [88, 84, 94, 80];
+
+  ctx.beginPath();
+  ctx.moveTo(0, 200 - values[0]);
+  values.forEach((v, i) => {
+    ctx.lineTo(i * 100, 200 - v);
+  });
+  ctx.strokeStyle = "#2a5298";
+  ctx.stroke();
+
+  // DIPLOMA
+  function openDiploma(){
+    document.getElementById("diploma").style.display = "flex";
+    document.getElementById("diplomaGpa").innerText = "GPA: " + gpa;
+  }
+
+  function closeDiploma(){
+    document.getElementById("diploma").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
